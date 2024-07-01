@@ -19,7 +19,10 @@ func Wizard() error {
 	}
 
 	Options.MediaPath = sys.WizardPrompt("Media folder path")
-	Options.TmpPath = sys.WizardPrompt("Temporary folder path")
+	checkInterval := sys.WizardPrompt("Channels check interval")
+	if checkInterval != "" {
+		Options.CheckInterval = int(Number(checkInterval))
+	}
 
 	tibula.Assets = dbAssets
 

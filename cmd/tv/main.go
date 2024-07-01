@@ -4,6 +4,7 @@ package main
 
 import (
 	"os"
+	"tv/internal/core"
 	"tv/internal/sys"
 	"tv/internal/web"
 
@@ -41,6 +42,7 @@ func main() {
 				log.Fatal("Cannot create media folder", err)
 			}
 		}
+		go core.Start()
 		if err := tibulaWeb.Start(); err != nil {
 			log.Fatal("Cannot start the web service: ", err)
 		}

@@ -13,7 +13,7 @@ var Options typeConfigSys
 
 func Configure() error {
 	flag.StringVar(&Options.MediaPath, "media-path", "/opt/eja/tv/media", "Media folder path")
-	flag.StringVar(&Options.TmpPath, "tmp-path", "/tmp/", "Temporary folder path")
+	flag.IntVar(&Options.CheckInterval, "check-interval", 3600, "Channels check interval")
 
 	if err := sys.Configure(); err != nil {
 		return err

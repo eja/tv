@@ -1,0 +1,8 @@
+tv
+tv.exe
+tv.json
+tibula.db
+
+dist/
+
+!cmd/tv

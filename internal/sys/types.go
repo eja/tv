@@ -8,8 +8,8 @@ import (
 
 type typeConfigSys struct {
 	sys.TypeConfig
-	MediaPath string `json:"media_path,omitempty"`
-	TmpPath   string `json:"tmp_path,omitempty"`
+	MediaPath     string `json:"media_path,omitempty"`
+	CheckInterval int    `json:"check_interval,omitempty"`
 }
 
 var String = sys.String
