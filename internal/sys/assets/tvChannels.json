@@ -1,0 +1,391 @@
+{
+  "module": {
+    "parentName": "tv",
+    "power": 20,
+    "searchLimit": 15,
+    "sqlCreated": 1
+  },
+  "command": [
+    "logout",
+    "new",
+    "edit",
+    "previous",
+    "next",
+    "copy",
+    "delete",
+    "save",
+    "search",
+    "list"
+  ],
+  "field": [
+    {
+      "value": "",
+      "powerEdit": 2,
+      "powerList": 2,
+      "type": "text",
+      "translate": 0,
+      "powerSearch": 2,
+      "name": "name",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    },
+    {
+      "value": "",
+      "powerEdit": 3,
+      "powerList": 3,
+      "type": "text",
+      "translate": 0,
+      "powerSearch": 3,
+      "name": "label",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    },
+    {
+      "value": "0|0 off\r\n1|1 http hls\r\n2|2 http hls cors\r\n11|11 http hls probe\r\n12|12 http hls probe cors\r\n101|101 https hls\r\n102|102 https hls cors\r\n111|111 https hls probe\r\n112|112 https hls probe cors\r\n",
+      "powerEdit": 1,
+      "powerList": 1,
+      "type": "select",
+      "translate": 0,
+      "powerSearch": 1,
+      "name": "status",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    },
+    {
+      "value": "",
+      "powerEdit": 21,
+      "powerList": 0,
+      "type": "text",
+      "translate": 0,
+      "powerSearch": 0,
+      "name": "sourceUrl",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    },
+    {
+      "value": "",
+      "powerEdit": 22,
+      "powerList": 0,
+      "type": "text",
+      "translate": 0,
+      "powerSearch": 0,
+      "name": "imageUrl",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    },
+    {
+      "value": "",
+      "powerEdit": 41,
+      "powerList": 41,
+      "type": "decimal",
+      "translate": 0,
+      "powerSearch": 0,
+      "name": "power",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    },
+    {
+      "value": "live\r\nvod",
+      "powerEdit": 20,
+      "powerList": 20,
+      "type": "select",
+      "translate": 0,
+      "powerSearch": 20,
+      "name": "mode",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    },
+    {
+      "value": "",
+      "powerEdit": 50,
+      "powerList": 0,
+      "type": "textArea",
+      "translate": 0,
+      "powerSearch": 0,
+      "name": "description",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    },
+    {
+      "value": "",
+      "powerEdit": 11,
+      "powerList": 11,
+      "type": "text",
+      "translate": 0,
+      "powerSearch": 11,
+      "name": "language",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    },
+    {
+      "value": "",
+      "powerEdit": 12,
+      "powerList": 12,
+      "type": "text",
+      "translate": 0,
+      "powerSearch": 12,
+      "name": "category",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    },
+    {
+      "value": "af|Afghanistan \r\nal|Albania \r\ndz|Algeria \r\nas|American Samoa \r\nad|Andorra \r\nao|Angola \r\nai|Anguilla \r\naq|Antarctica \r\nag|Antigua and Barbuda \r\nar|Argentina \r\nam|Armenia \r\naw|Aruba \r\nau|Australia \r\nat|Austria \r\naz|Azerbaijan \r\nbs|Bahamas \r\nbh|Bahrain \r\nbd|Bangladesh \r\nbb|Barbados \r\nby|Belarus \r\nbe|Belgium \r\nbz|Belize \r\nbj|Benin \r\nbm|Bermuda \r\nbt|Bhutan \r\nbo|Bolivia \r\nba|Bosnia and Herzegovina \r\nbw|Botswana \r\nbv|Bouvet Island \r\nbr|Brazil \r\nio|British Indian Ocean Territory \r\nbn|Brunei Darussalam \r\nbg|Bulgaria \r\nbf|Burkina Faso \r\nbi|Burundi \r\nkh|Cambodia \r\ncm|Cameroon \r\nca|Canada \r\ncv|Cape Verde \r\nky|Cayman Islands \r\ncf|Central African Republic \r\ntd|Chad \r\ncl|Chile \r\ncn|China \r\ncx|Christmas Island \r\ncc|Cocos (Keeling) Islands \r\nco|Colombia \r\nkm|Comoros \r\ncg|Congo \r\nck|Cook Islands \r\ncr|Costa Rica \r\nci|Cote D'Ivoire (Ivory Coast) \r\nhr|Croatia (Hrvatska) \r\ncu|Cuba \r\ncy|Cyprus \r\ncz|Czech Republic \r\ncs|Czechoslovakia (former) \r\ndk|Denmark \r\ndj|Djibouti \r\ndm|Dominica \r\ndo|Dominican Republic \r\ntp|East Timor \r\nec|Ecuador \r\neg|Egypt \r\nsv|El Salvador \r\ngq|Equatorial Guinea \r\ner|Eritrea \r\nee|Estonia \r\net|Ethiopia \r\nfk|Falkland Islands (Malvinas) \r\nfo|Faroe Islands \r\nfj|Fiji \r\nfi|Finland \r\nfr|France \r\nfx|France, Metropolitan \r\ngf|French Guiana \r\npf|French Polynesia \r\ntf|French Southern Territories \r\nga|Gabon \r\ngm|Gambia \r\nge|Georgia \r\nde|Germany \r\ngh|Ghana \r\ngi|Gibraltar \r\ngb|Great Britain (UK) \r\ngr|Greece \r\ngl|Greenland \r\ngd|Grenada \r\ngp|Guadeloupe \r\ngu|Guam \r\ngt|Guatemala \r\ngn|Guinea \r\ngw|Guinea-Bissau \r\ngy|Guyana \r\nht|Haiti \r\nhm|Heard and McDonald Islands \r\nhn|Honduras \r\nhk|Hong Kong \r\nhu|Hungary \r\nis|Iceland \r\nin|India \r\nid|Indonesia \r\nint|International \r\nir|Iran \r\niq|Iraq \r\nie|Ireland \r\nil|Israel \r\nit|Italy \r\njm|Jamaica \r\njp|Japan \r\njo|Jordan \r\nkz|Kazakhstan \r\nke|Kenya \r\nki|Kiribati \r\nkp|Korea (North) \r\nkr|Korea (South) \r\nkw|Kuwait \r\nkg|Kyrgyzstan \r\nla|Laos \r\nlv|Latvia \r\nlb|Lebanon \r\nls|Lesotho \r\nlr|Liberia \r\nly|Libya \r\nli|Liechtenstein \r\nlt|Lithuania \r\nlu|Luxembourg \r\nmo|Macau \r\nmk|Macedonia \r\nmg|Madagascar \r\nmw|Malawi \r\nmy|Malaysia \r\nmv|Maldives \r\nml|Mali \r\nmt|Malta \r\nmh|Marshall Islands \r\nmq|Martinique \r\nmr|Mauritania \r\nmu|Mauritius \r\nyt|Mayotte \r\nmx|Mexico \r\nfm|Micronesia \r\nmd|Moldova \r\nmc|Monaco \r\nmn|Mongolia \r\nms|Montserrat \r\nma|Morocco \r\nmz|Mozambique \r\nmm|Myanmar \r\nna|Namibia \r\nnr|Nauru \r\nnp|Nepal \r\nan|Netherlands Antilles \r\nnl|Netherlands \r\nnt|Neutral Zone \r\nnc|New Caledonia \r\nnz|New Zealand (Aotearoa) \r\nni|Nicaragua \r\nne|Niger \r\nng|Nigeria \r\nnu|Niue \r\nnf|Norfolk Island \r\nmp|Northern Mariana Islands \r\nno|Norway \r\nom|Oman \r\npk|Pakistan \r\npw|Palau \r\npa|Panama \r\npg|Papua New Guinea \r\npy|Paraguay \r\npe|Peru \r\nph|Philippines \r\npn|Pitcairn \r\npl|Poland \r\npt|Portugal \r\npr|Puerto Rico \r\nqa|Qatar \r\nre|Reunion \r\nro|Romania \r\nru|Russia \r\nrw|Rwanda \r\ngs|S. Georgia and S. Sandwich Isls. \r\nkn|Saint Kitts and Nevis \r\nlc|Saint Lucia \r\nvc|Saint Vincent and the Grenadines \r\nws|Samoa \r\nsm|San Marino \r\nst|Sao Tome and Principe \r\nsa|Saudi Arabia \r\nsn|Senegal \r\nsc|Seychelles \r\nsl|Sierra Leone \r\nsg|Singapore \r\nsk|Slovak Republic \r\nsi|Slovenia \r\nsb|Solomon Islands \r\nso|Somalia \r\nza|South Africa \r\nes|Spain \r\nlk|Sri Lanka \r\nsh|St. Helena \r\npm|St. Pierre and Miquelon \r\nsd|Sudan \r\nsr|Suriname \r\nsj|Svalbard and Jan Mayen Islands \r\nsz|Swaziland \r\nse|Sweden \r\nch|Switzerland \r\nsy|Syria \r\ntw|Taiwan \r\ntj|Tajikistan \r\ntz|Tanzania \r\nth|Thailand \r\ntg|Togo \r\ntk|Tokelau \r\nto|Tonga \r\ntt|Trinidad and Tobago \r\ntn|Tunisia \r\ntr|Turkey \r\ntm|Turkmenistan \r\ntc|Turks and Caicos Islands \r\ntv|Tuvalu \r\num|US Minor Outlying Islands \r\nsu|USSR (former) \r\nug|Uganda \r\nua|Ukraine \r\nae|United Arab Emirates \r\nuk|United Kingdom \r\nus|United States \r\nuy|Uruguay \r\nuz|Uzbekistan \r\nvu|Vanuatu \r\nva|Vatican City State (Holy See) \r\nve|Venezuela \r\nvn|Viet Nam \r\nvg|Virgin Islands (British) \r\nvi|Virgin Islands (U.S.) \r\nwf|Wallis and Futuna Islands \r\neh|Western Sahara \r\nye|Yemen \r\nyu|Yugoslavia \r\nzr|Zaire \r\nzm|Zambia \r\nzw|Zimbabwe \r\nunsorted|Unsorted \r\n",
+      "powerEdit": 10,
+      "powerList": 10,
+      "type": "select",
+      "translate": 0,
+      "powerSearch": 10,
+      "name": "country",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    },
+    {
+      "value": "",
+      "powerEdit": 61,
+      "powerList": 0,
+      "type": "datetime",
+      "translate": 0,
+      "powerSearch": 0,
+      "name": "checkLast",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    },
+    {
+      "value": "",
+      "powerEdit": 62,
+      "powerList": 0,
+      "type": "datetime",
+      "translate": 0,
+      "powerSearch": 0,
+      "name": "checkLastWorking",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    },
+    {
+      "value": "",
+      "powerEdit": 42,
+      "powerList": 0,
+      "type": "integer",
+      "translate": 0,
+      "powerSearch": 0,
+      "name": "checkInterval",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    },
+    {
+      "value": "",
+      "powerEdit": 31,
+      "powerList": 0,
+      "type": "text",
+      "translate": 0,
+      "powerSearch": 0,
+      "name": "size",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    },
+    {
+      "value": "",
+      "powerEdit": 63,
+      "powerList": 0,
+      "type": "datetime",
+      "translate": 0,
+      "powerSearch": 0,
+      "name": "checkLastPlaying",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    },
+    {
+      "value": "",
+      "powerEdit": 64,
+      "powerList": 0,
+      "type": "datetime",
+      "translate": 0,
+      "powerSearch": 0,
+      "name": "checkLastOpen",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    },
+    {
+      "value": "",
+      "powerEdit": 40,
+      "powerList": 0,
+      "type": "text",
+      "translate": 0,
+      "powerSearch": 0,
+      "name": "epgId",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    },
+    {
+      "value": "",
+      "powerEdit": 30,
+      "powerList": 0,
+      "type": "boolean",
+      "translate": 0,
+      "powerSearch": 0,
+      "name": "subtitle",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    },
+    {
+      "value": "",
+      "powerEdit": 32,
+      "powerList": 0,
+      "type": "text",
+      "translate": 0,
+      "powerSearch": 0,
+      "name": "abr",
+      "sizeSearch": 0,
+      "sizeList": 0,
+      "sizeEdit": 0
+    }
+  ],
+  "translation": [
+    {
+      "ejaLanguage": "en",
+      "word": "tvChannels",
+      "translation": "Channels"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "status",
+      "translation": "Status"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "name",
+      "translation": "Internal Name"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "label",
+      "translation": "Channel Name"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "country",
+      "translation": "Country"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "language",
+      "translation": "Language"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "category",
+      "translation": "Category"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "mode",
+      "translation": "Mode"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "sourceUrl",
+      "translation": "Source URL"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "imageUrl",
+      "translation": "Logo URL"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "epgId",
+      "translation": "EPG ID"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "subtitle",
+      "translation": "Subtitles"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "abr",
+      "translation": "Adaptive Bitrates"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "power",
+      "translation": "Channel Power"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "size",
+      "translation": "Max Resolution"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "checkInterval",
+      "translation": "Check Interval"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "checkLast",
+      "translation": "Last Check"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "checkLastWorking",
+      "translation": "Last Working Check"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "checkLastPlaying",
+      "translation": "Last Playing Check"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "checkLastOpen",
+      "translation": "Last Open Check"
+    },
+    {
+      "ejaLanguage": "en",
+      "ejaModuleName": "tvChannels",
+      "word": "description",
+      "translation": "Description"
+    }
+  ],
+  "name": "tvChannels",
+  "data": null
+}

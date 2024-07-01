@@ -1,0 +1,21 @@
+{
+  "module": {
+    "parentName": "eja",
+    "power": 100,
+    "searchLimit": 0,
+    "sqlCreated": 0
+  },
+  "command": [
+    "logout"
+  ],
+  "field": null,
+  "translation": [
+    {
+      "ejaLanguage": "en",
+      "word": "tv",
+      "translation": "TV"
+    }
+  ],
+  "name": "tv",
+  "data": null
+}
