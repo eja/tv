@@ -1,6 +1,6 @@
 module tv
 
-go 1.21.5
+go 1.20
 
 require github.com/eja/tibula v0.0.0-20240628111408-b9cda222b1d7
 
