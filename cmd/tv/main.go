@@ -3,7 +3,6 @@
 package main
 
 import (
-	"os"
 	"tv/internal/core"
 	"tv/internal/sys"
 	"tv/internal/web"
@@ -36,11 +35,6 @@ func main() {
 		}
 		if err := web.Router(); err != nil {
 			log.Fatal(err)
-		}
-		if _, err := os.Stat(sys.Options.MediaPath); os.IsNotExist(err) {
-			if err := os.MkdirAll(sys.Options.MediaPath, 0755); err != nil {
-				log.Fatal("Cannot create media folder", err)
-			}
 		}
 		go core.Start()
 		if err := tibulaWeb.Start(); err != nil {

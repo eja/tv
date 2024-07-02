@@ -16,15 +16,13 @@ import (
 	"github.com/eja/tibula/log"
 )
 
-const channelsBatch = 100
-
 func checkChannels() (err error) {
 	db := tibula.Session()
 	if err = db.Open(sys.Options.DbType, sys.Options.DbName, sys.Options.DbUser, sys.Options.DbPass, sys.Options.DbHost, sys.Options.DbPort); err != nil {
 		return
 	}
 	for {
-		timeLastCheck := time.Now().Add(-time.Duration(sys.Options.CheckInterval) * time.Second).Format("2006-01-02 15:04:05")
+		timeLastCheck := time.Now().Add(-time.Duration(sys.Options.TvCheckInterval) * time.Second).Format("2006-01-02 15:04:05")
 		timeLastWorking := time.Now().Add(-30 * 24 * time.Hour).Format("2006-01-02 15:04:05")
 		rows, err := db.Rows(`SELECT * FROM tvChannels WHERE 
 		  (checkLast < ? OR checkLast IS NULL OR checkLast = "") AND 
@@ -36,7 +34,7 @@ func checkChannels() (err error) {
 			name != "" 
 			ORDER BY power DESC, checkLast ASC 
 			LIMIT ?
-		`, timeLastCheck, timeLastWorking, timeLastWorking, channelsBatch)
+		`, timeLastCheck, timeLastWorking, timeLastWorking, sys.Options.TvCheckBatch)
 		if err != nil {
 			return err
 		}
@@ -46,7 +44,7 @@ func checkChannels() (err error) {
 			var videoSize string
 			status := 0
 			ABR := 0
-			framePath := filepath.Join(sys.Options.MediaPath, row["name"]+".png")
+			framePath := filepath.Join(sys.Options.TvMediaPath, row["name"]+".png")
 
 			cors, subtitles, err := checkPlaylist(row["sourceUrl"])
 			if err != nil {

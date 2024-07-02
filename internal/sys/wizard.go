@@ -18,10 +18,14 @@ func Wizard() error {
 		return err
 	}
 
-	Options.MediaPath = sys.WizardPrompt("Media folder path")
+	Options.TvMediaPath = sys.WizardPrompt("Media folder path")
 	checkInterval := sys.WizardPrompt("Channels check interval")
 	if checkInterval != "" {
-		Options.CheckInterval = int(Number(checkInterval))
+		Options.TvCheckInterval = int(Number(checkInterval))
+	}
+	checkBatch := sys.WizardPrompt("Channels check batch size")
+	if checkBatch != "" {
+		Options.TvCheckBatch = int(Number(checkBatch))
 	}
 
 	tibula.Assets = dbAssets

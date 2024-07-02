@@ -3,4 +3,4 @@
 package sys
 
 const Name = "tv"
-const Version = "8.7.1"
+const Version = "8.7.2"

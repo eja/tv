@@ -12,8 +12,9 @@ import (
 var Options typeConfigSys
 
 func Configure() error {
-	flag.StringVar(&Options.MediaPath, "media-path", "/opt/eja/tv/media", "Media folder path")
-	flag.IntVar(&Options.CheckInterval, "check-interval", 3600, "Channels check interval")
+	flag.StringVar(&Options.TvMediaPath, "tv-media-path", "/opt/eja/tv/media", "Media folder path")
+	flag.IntVar(&Options.TvCheckInterval, "tv-check-interval", 3600, "Channels check interval")
+	flag.IntVar(&Options.TvCheckBatch, "tv-check-batch", 10, "Channels check batch")
 
 	if err := sys.Configure(); err != nil {
 		return err
