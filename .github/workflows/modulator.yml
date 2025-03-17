@@ -1,0 +1,74 @@
+name: Build Release
+
+on:
+  release:
+    types: [published]
+
+env:
+  PROGRAM_NAME: "modulator"
+
+jobs:
+  build-linux-amd64:
+    name: Build for Linux AMD64
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.24'
+          
+      - name: Build for Linux AMD64
+        run: |
+          CGO_ENABLED=1 \
+          GOOS=linux \
+          GOARCH=amd64 \
+          go build -ldflags="-s -w -extldflags '-static'" -o ${{ env.PROGRAM_NAME }} ./cmd/${{ env.PROGRAM_NAME }}/...
+
+      - name: Compress artifact
+        run: tar -czvf ${{ env.PROGRAM_NAME }}-linux-amd64.tar.gz ${{ env.PROGRAM_NAME }}
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ${{ env.PROGRAM_NAME }}-linux-amd64.tar.gz
+          asset_name: ${{ env.PROGRAM_NAME }}-linux-amd64.tar.gz
+          asset_content_type: application/octet-stream
+
+  build-linux-arm64:
+    name: Build for Linux ARM64
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.24'
+
+      - name: Build for Linux ARM64
+        run: |
+          CGO_ENABLED=1 \
+          GOOS=linux \
+          GOARCH=arm64 \
+          go build -ldflags="-s -w -extldflags '-static'" -o ${{ env.PROGRAM_NAME }} ./cmd/${{ env.PROGRAM_NAME }}/...
+
+      - name: Compress artifact
+        run: tar -czvf ${{ env.PROGRAM_NAME }}-linux-arm64.tar.gz ${{ env.PROGRAM_NAME }}
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ${{ env.PROGRAM_NAME }}-linux-arm64.tar.gz
+          asset_name: ${{ env.PROGRAM_NAME }}-linux-arm64.tar.gz
+          asset_content_type: application/octet-stream
+

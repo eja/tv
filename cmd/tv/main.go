@@ -36,7 +36,11 @@ func main() {
 		if err := web.Router(); err != nil {
 			log.Fatal(err)
 		}
-		go core.Start()
+		if sys.Options.TvCheck {
+			if err := core.Start(); err != nil {
+				log.Fatal(err)
+			}
+		}
 		if err := tibulaWeb.Start(); err != nil {
 			log.Fatal("Cannot start the web service: ", err)
 		}

@@ -1,8 +1,11 @@
+tibula.db
+
 tv
 tv.exe
 tv.json
-tibula.db
-
-dist/
+modulator
+modulator.exe
 
 !cmd/tv
+!cmd/modulator
+

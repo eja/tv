@@ -18,5 +18,7 @@ func Start() (err error) {
 		}
 	}
 
-	return checkChannels()
+	go checkChannels()
+
+	return
 }

@@ -1,0 +1,239 @@
+name: Build Release
+
+on:
+  release:
+    types: [published]
+
+env:
+  PROGRAM_NAME: "tv"
+
+jobs:
+  build-macos-amd64:
+    name: Build for MacOS AMD64
+    runs-on: macos-13
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.24'
+
+      - name: Build for MacOS AMD64
+        run: |
+          CGO_ENABLED=1 \
+          GOOS=darwin \
+          GOARCH=amd64 \
+          go build -ldflags="-s -w" -o ${{ env.PROGRAM_NAME }} ./cmd/${{ env.PROGRAM_NAME }}/...
+
+      - name: Compress artifact
+        run: tar -czvf ${{ env.PROGRAM_NAME }}-macos-amd64.tar.gz ${{ env.PROGRAM_NAME }}
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ${{ env.PROGRAM_NAME }}-macos-amd64.tar.gz
+          asset_name: ${{ env.PROGRAM_NAME }}-macos-amd64.tar.gz
+          asset_content_type: application/octet-stream
+
+  build-macos-arm64:
+    name: Build for MacOS ARM64
+    runs-on: macos-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.24'
+
+      - name: Build for MacOS ARM64
+        run: |
+          CGO_ENABLED=1 \
+          GOOS=darwin \
+          GOARCH=arm64 \
+          go build -ldflags="-s -w" -o ${{ env.PROGRAM_NAME }} ./cmd/${{ env.PROGRAM_NAME }}/...
+
+      - name: Compress artifact
+        run: tar -czvf ${{ env.PROGRAM_NAME }}-macos-arm64.tar.gz ${{ env.PROGRAM_NAME }}
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ${{ env.PROGRAM_NAME }}-macos-arm64.tar.gz
+          asset_name: ${{ env.PROGRAM_NAME }}-macos-arm64.tar.gz
+          asset_content_type: application/octet-stream
+
+  build-linux-amd64:
+    name: Build for Linux AMD64
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.24'
+          
+      - name: Build for Linux AMD64
+        run: |
+          CGO_ENABLED=1 \
+          GOOS=linux \
+          GOARCH=amd64 \
+          go build -ldflags="-s -w -extldflags '-static'" -o ${{ env.PROGRAM_NAME }} ./cmd/${{ env.PROGRAM_NAME }}/...
+
+      - name: Compress artifact
+        run: tar -czvf ${{ env.PROGRAM_NAME }}-linux-amd64.tar.gz ${{ env.PROGRAM_NAME }}
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ${{ env.PROGRAM_NAME }}-linux-amd64.tar.gz
+          asset_name: ${{ env.PROGRAM_NAME }}-linux-amd64.tar.gz
+          asset_content_type: application/octet-stream
+
+  build-linux-arm64:
+    name: Build for Linux ARM64
+    runs-on: ubuntu-24.04-arm
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.24'
+
+      - name: Build for Linux ARM64
+        run: |
+          CGO_ENABLED=1 \
+          GOOS=linux \
+          GOARCH=arm64 \
+          go build -ldflags="-s -w -extldflags '-static'" -o ${{ env.PROGRAM_NAME }} ./cmd/${{ env.PROGRAM_NAME }}/...
+
+      - name: Compress artifact
+        run: tar -czvf ${{ env.PROGRAM_NAME }}-linux-arm64.tar.gz ${{ env.PROGRAM_NAME }}
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ${{ env.PROGRAM_NAME }}-linux-arm64.tar.gz
+          asset_name: ${{ env.PROGRAM_NAME }}-linux-arm64.tar.gz
+          asset_content_type: application/octet-stream
+
+  build-linux-arm32:
+    name: Build for Linux ARM32
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.24'
+
+      - name: Install ARM32 cross-compiler
+        run: sudo apt-get update && sudo apt-get install -y gcc-arm-linux-gnueabi g++-arm-linux-gnueabi libsqlite3-dev
+
+      - name: Build for Linux ARM32
+        run: |
+          CGO_ENABLED=1 \
+          CC=arm-linux-gnueabi-gcc \
+          CXX=arm-linux-gnueabi-g++ \
+          GOOS=linux \
+          GOARCH=arm \
+          GOARM=7 \
+          go build -ldflags="-s -w -extldflags '-static'" -o ${{ env.PROGRAM_NAME }} ./cmd/${{ env.PROGRAM_NAME }}/...
+
+      - name: Compress artifact
+        run: tar -czvf ${{ env.PROGRAM_NAME }}-linux-arm32.tar.gz ${{ env.PROGRAM_NAME }}
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ${{ env.PROGRAM_NAME }}-linux-arm32.tar.gz
+          asset_name: ${{ env.PROGRAM_NAME }}-linux-arm32.tar.gz
+          asset_content_type: application/octet-stream
+
+  build-windows-amd64:
+    name: Build for Windows AMD64
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.24'
+
+      - name: Build for Windows AMD64
+        run: |
+          $env:CGO_ENABLED = "1"; 
+          $env:GOOS = "windows"; 
+          $env:GOARCH = "amd64"; 
+          go build -ldflags="-s -w" -o ${{ env.PROGRAM_NAME }}.exe ./cmd/${{ env.PROGRAM_NAME }}/...
+
+      - name: Compress artifact
+        run: Compress-Archive -Path ${{ env.PROGRAM_NAME }}.exe -DestinationPath ${{ env.PROGRAM_NAME }}-windows-amd64.zip
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ${{ env.PROGRAM_NAME }}-windows-amd64.zip
+          asset_name: ${{ env.PROGRAM_NAME }}-windows-amd64.zip
+          asset_content_type: application/octet-stream
+
+  build-windows-arm64:
+    name: Build for Windows ARM64
+    runs-on: windows-arm64
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.24'
+
+      - name: Build for Windows ARM64
+        run: |
+          $env:CGO_ENABLED = "1"; 
+          $env:GOOS = "windows"; 
+          $env:GOARCH = "arm64"; 
+          go build -ldflags="-s -w" -o ${{ env.PROGRAM_NAME }}.exe ./cmd/${{ env.PROGRAM_NAME }}/...
+
+      - name: Compress artifact
+        run: Compress-Archive -Path ${{ env.PROGRAM_NAME }}.exe -DestinationPath ${{ env.PROGRAM_NAME }}-windows-arm64.zip
+
+      - name: Upload release asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ${{ env.PROGRAM_NAME }}-windows-arm64.zip
+          asset_name: ${{ env.PROGRAM_NAME }}-windows-arm64.zip
+          asset_content_type: application/octet-stream

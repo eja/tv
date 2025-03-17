@@ -9,6 +9,7 @@ import (
 type typeConfigSys struct {
 	sys.TypeConfig
 	TvMediaPath     string `json:"tv_media_path,omitempty"`
+	TvCheck         bool   `json:"tv_check,omitempty"`
 	TvCheckInterval int    `json:"tv_check_interval,omitempty"`
 	TvCheckBatch    int    `json:"tv_check_batch,omitempty"`
 }
