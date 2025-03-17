@@ -22,8 +22,7 @@ type ApiRequest struct {
 }
 
 type ApiResponse struct {
-	Host             string  `json:"host"`
-	Port             int     `json:"port"`
+	Url              string  `json:"url"`
 	Frequency        float64 `json:"frequency"`
 	Bandwidth        int     `json:"bandwidth"`
 	Constellation    int     `json:"constellation"`
@@ -45,24 +44,25 @@ func start(apiUrl string, maxRetries int) error {
 		if err != nil {
 			log.Printf("api retrieval problem: %v", err)
 		} else {
-			if config.Host != "" && config.Port > 0 {
+			if config.Url != "" {
+				log.Println("injecting")
 				codeRate := []string{"1/2", "2/3", "3/4", "5/6", "7/8"}
 				constellation := []string{"QPSK", "16-QAM", "64-QAM"}
 				transmissionMode := []string{"2K", "8K", "4K"}
 				guardInterval := []string{"1/32", "1/16", "1/8", "1/4"}
-
-				err := exec.Command("tsp", "-timed-log",
-					"-P bitrate_monitor", "--min", "1000000", "--alarm-command", "killall -9 tsp #",
-					"-I", fmt.Sprintf("http://%s:%d/%s", config.Host, config.Port, uuid),
-					"-O", "vatek", "--modulation", "DVB-T", "--remux passthrough",
+				cmd := exec.Command("tsp",
+					"-P", "bitrate_monitor", "--min", "1000000", "--alarm-command", "killall -9 tsp #",
+					"-I", "http", "--compressed", config.Url,
+					"-O", "vatek", "--modulation", "DVB-T", "--remux", "passthrough",
 					"--frequency", fmt.Sprintf("%.0f", config.Frequency*1000),
-					"--bandwidth", fmt.Sprintf("%.3f", float64(config.Bandwidth)/1000),
+					"--bandwidth", fmt.Sprintf("%d", config.Bandwidth/1000),
 					"--constellation", constellation[config.Constellation],
 					"--convolutional-rate", codeRate[config.CodeRate],
 					"--guard-interval", guardInterval[config.GuardInterval],
-					"--transmission-mode", transmissionMode[config.TransmissionMode]).Run()
-				if err != nil {
-					log.Printf("error executing command: %v", err)
+					"--transmission-mode", transmissionMode[config.TransmissionMode],
+				)
+				if output, err := cmd.CombinedOutput(); err != nil {
+					log.Printf("error executing command: %v\n%s\n", err, string(output))
 				}
 
 			} else {
@@ -75,6 +75,7 @@ func start(apiUrl string, maxRetries int) error {
 			if err := exec.Command("/sbin/reboot", "--force").Run(); err != nil {
 				return err
 			}
+
 		} else {
 			time.Sleep(10 * time.Second)
 		}

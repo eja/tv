@@ -4,6 +4,8 @@ package main
 
 import (
 	"fmt"
+	"io"
+	"net/http"
 	"os"
 	"os/exec"
 	"runtime"
@@ -21,12 +23,11 @@ func install() error {
 	commands := []string{
 		"apt update",
 		"apt install -y psmisc",
-		"apt install -y wget",
 	}
 
 	for _, cmd := range commands {
 		if err := exec.Command("sh", "-c", cmd).Run(); err != nil {
-			return fmt.Errorf("failed to execute command %s: %w\n", cmd, err)
+			return fmt.Errorf(`failed to execute command "%s": %w\n`, cmd, err)
 		}
 	}
 
@@ -40,12 +41,40 @@ func install() error {
 		return fmt.Errorf("Unsupported architecture")
 	}
 
-	if err := exec.Command("wget", "-O", "/tmp/tsduck.deb", tsduckURL).Run(); err != nil {
-		return fmt.Errorf("failed to download tsduck: %w\n", err)
+	tsduckFilePath := "/tmp/tsduck.deb"
+	if err := downloadFile(tsduckURL, tsduckFilePath); err != nil {
+		return fmt.Errorf("failed to download tsduck: %w", err)
 	}
 
-	if err := exec.Command("apt", "install", "-y", "/tmp/tsduck.deb").Run(); err != nil {
-		return fmt.Errorf("failed to install tsduck: %w\n", err)
+	if err := exec.Command("apt", "install", "-y", tsduckFilePath).Run(); err != nil {
+		return fmt.Errorf("failed to install tsduck: %w", err)
+	}
+
+	return nil
+}
+
+func downloadFile(url, filePath string) error {
+	client := &http.Client{}
+
+	resp, err := client.Get(url)
+	if err != nil {
+		return fmt.Errorf("error making request: %w", err)
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("received non-200 status code: %d", resp.StatusCode)
+	}
+
+	outFile, err := os.Create(filePath)
+	if err != nil {
+		return fmt.Errorf("error creating file: %w", err)
+	}
+	defer outFile.Close()
+
+	_, err = io.Copy(outFile, resp.Body)
+	if err != nil {
+		return fmt.Errorf("error saving file: %w", err)
 	}
 
 	return nil
