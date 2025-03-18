@@ -53,7 +53,7 @@ func start(apiUrl string, maxRetries int) error {
 				cmd := exec.Command("tsp",
 					"-P", "bitrate_monitor", "--min", "1000000", "--alarm-command", "killall -9 tsp #",
 					"-I", "http", "--compressed", config.Url,
-					"-O", "vatek", "--modulation", "DVB-T", "--remux", "passthrough",
+					"-O", "vatek", "--modulation", "DVB-T", "--remux", "passthrough", "--device", "0",
 					"--frequency", fmt.Sprintf("%.0f", config.Frequency*1000),
 					"--bandwidth", fmt.Sprintf("%d", config.Bandwidth/1000),
 					"--constellation", constellation[config.Constellation],

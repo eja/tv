@@ -10,7 +10,7 @@ import (
 
 const (
 	Name    = "modulator"
-	Version = "9.3.17"
+	Version = "9.3.18"
 )
 
 var (
