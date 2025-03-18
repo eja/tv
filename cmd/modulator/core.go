@@ -62,7 +62,7 @@ func start(apiUrl string, maxRetries int) error {
 					"--transmission-mode", transmissionMode[config.TransmissionMode],
 				)
 				if output, err := cmd.CombinedOutput(); err != nil {
-					log.Printf("error executing command: %v\n%s\n", err, string(output))
+					log.Printf("%s\n", string(output))
 				}
 
 			} else {
